@@ -16,3 +16,4 @@ chromadb
 pymupdf
 pandas
 duckduckgo-search
+torchvision
