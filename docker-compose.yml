@@ -38,6 +38,7 @@ services:
       - ./chroma_db:/app/chroma_db
       - ./data:/app/data
 
+
     depends_on:
       - backend
 

@@ -26,8 +26,10 @@ st.set_page_config(
     layout="wide"
 )
 
+import os
+
 # API endpoint configuration
-API_URL = "http://localhost:8000/api/v1"
+API_URL = os.getenv("API_URL", "http://localhost:8000/api/v1")
 
 # Create a top section layout for header and horizontal theme selector
 # Custom Premium Styling (Dark/Light Mode Compatible Glassmorphism)
