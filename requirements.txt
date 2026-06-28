@@ -16,4 +16,4 @@ chromadb
 pymupdf
 pandas
 duckduckgo-search
-torchvision
+rank_bm25
