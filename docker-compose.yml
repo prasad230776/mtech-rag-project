@@ -34,6 +34,9 @@ services:
     env_file:
       - .env
 
+    environment:
+      - API_URL=http://backend:8000/api/v1
+
     volumes:
       - ./chroma_db:/app/chroma_db
       - ./data:/app/data
