@@ -1,0 +1,6 @@
+# .streamlit/config.toml
+[server]
+fileWatcherType = "none"
+
+[browser]
+gatherUsageStats = false

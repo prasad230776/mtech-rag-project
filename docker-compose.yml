@@ -24,7 +24,7 @@ services:
     container_name: rag_frontend
 
     command: >
-      uv run streamlit run app.py
+      uv run streamlit run app.py --server.fileWatcherType none
       --server.address=0.0.0.0
       --server.port=8501
 
@@ -36,6 +36,8 @@ services:
 
     environment:
       - API_URL=http://backend:8000/api/v1
+      - STREAMLIT_SERVER_FILE_WATCHER_TYPE=none
+      
 
     volumes:
       - ./chroma_db:/app/chroma_db

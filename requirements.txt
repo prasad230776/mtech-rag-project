@@ -17,5 +17,3 @@ pymupdf
 pandas
 duckduckgo-search
 rank_bm25
-torch
-torchvision
