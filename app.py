@@ -93,6 +93,10 @@ st.markdown(
         margin-top: 0 !important;
     }
 
+    .st-emotion-cache-zy6yx3 {
+        padding: 4.5rem 1rem 10rem !important;
+    }
+
     /* Make both columns start at same height */
     div[data-testid="stHorizontalBlock"] {
         align-items: flex-start !important;
@@ -215,15 +219,21 @@ st.markdown(
             align-items: center !important;
             padding-bottom: 0px !important;
         }
-        /* 1. Move whole page/header up on mobile but keep arrows/menus visible */
+        /* 1. Move whole page/header up on mobile but keep arrows/menus visible and uncut */
         [data-testid="stHeader"] {
             background-color: rgba(0, 0, 0, 0) !important;
             background: transparent !important;
+            height: 40px !important;
+            min-height: 40px !important;
+        }
+        [data-testid="stHeader"] button,
+        div[data-testid="collapsedControl"] {
+            top: 10px !important;
         }
         .main .block-container,
         div[data-testid="stAppViewBlockContainer"] {
-            padding-top: 35px !important;
-            margin-top: -35px !important;
+            padding-top: 0px !important;
+            margin-top: -52px !important;
         }
         /* 2. Decrease space between header and chat assistant */
         .responsive-hr {
@@ -236,6 +246,9 @@ st.markdown(
         /* 3. Decrease height of the chat display container to fit viewport */
         div[data-testid="stVerticalBlock"][style*="height"] {
             height: 140px !important;
+        }
+        .st-emotion-cache-zy6yx3 {
+            padding: 3rem 1rem 10rem !important;
         }
     }
 </style>
