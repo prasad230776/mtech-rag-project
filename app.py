@@ -208,12 +208,12 @@ st.markdown(
             flex-direction: column !important;
             align-items: center !important;
             text-align: center !important;
-            gap: 15px !important;
+            gap: 4px !important;
             margin-bottom: 15px !important;
         }
         .header-logo {
             height: 90px !important;
-            margin-bottom: 5px !important;
+            margin-bottom: 0px !important;
         }
         .header-text-container {
             align-items: center !important;
@@ -236,12 +236,16 @@ st.markdown(
             margin-top: -52px !important;
         }
         /* 2. Decrease space between header and chat assistant */
+        .header-title {
+            font-size: 1.7rem !important;
+        }
+        .header-sublabel,
         .responsive-hr {
-            margin-top: 5px !important;
-            margin-bottom: 10px !important;
+            display: none !important;
         }
         div[data-testid="stVerticalBlockBorderWrapper"] {
             padding: 8px 12px 10px 12px !important;
+            margin-top: -15px !important;
         }
         /* 3. Decrease height of the chat display container to fit viewport */
         div[data-testid="stVerticalBlock"][style*="height"] {
@@ -262,9 +266,9 @@ st.markdown(
 <div class="header-container">
     <img src="{logo_base64}" class="header-logo">
     <div class="header-text-container">
-        <h1 class="gradient-text" style="font-size: 2.3rem; margin: 0; padding: 0; line-height: 1.0;">SEAT CHAT BOT</h1>
+        <h1 class="gradient-text header-title" style="font-size: 2.3rem; margin: 0; padding: 0; line-height: 1.0;">SEAT CHAT BOT</h1>
         <h2 style="font-size: 1.15rem; color: #f8fafc !important; font-weight: 600; margin: 6px 0 3px 0; padding: 0; font-family: 'Space Grotesk'; letter-spacing: 0.2px; line-height: 1.1;">Siddartha Educational Academy Group of Institutions</h2>
-        <p style="color: #94a3b8 !important; font-size: 0.90rem; margin: 2px 0 0 0; padding: 0; font-weight: 400; line-height: 1.1;">Multi-Stage Hallucination Mitigation RAG (V0 - V5)</p>
+        <p class="header-sublabel" style="color: #94a3b8 !important; font-size: 0.90rem; margin: 2px 0 0 0; padding: 0; font-weight: 400; line-height: 1.1;">Multi-Stage Hallucination Mitigation RAG (V0 - V5)</p>
     </div>
 </div>
 """,
