@@ -215,6 +215,28 @@ st.markdown(
             align-items: center !important;
             padding-bottom: 0px !important;
         }
+        /* 1. Move whole page/header up on mobile but keep arrows/menus visible */
+        [data-testid="stHeader"] {
+            background-color: rgba(0, 0, 0, 0) !important;
+            background: transparent !important;
+        }
+        .main .block-container,
+        div[data-testid="stAppViewBlockContainer"] {
+            padding-top: 35px !important;
+            margin-top: -35px !important;
+        }
+        /* 2. Decrease space between header and chat assistant */
+        .responsive-hr {
+            margin-top: 5px !important;
+            margin-bottom: 10px !important;
+        }
+        div[data-testid="stVerticalBlockBorderWrapper"] {
+            padding: 8px 12px 10px 12px !important;
+        }
+        /* 3. Decrease height of the chat display container to fit viewport */
+        div[data-testid="stVerticalBlock"][style*="height"] {
+            height: 140px !important;
+        }
     }
 </style>
 """,
@@ -237,7 +259,7 @@ st.markdown(
 )
 
 st.markdown(
-    "<hr style='border: 0; height: 1px; background: linear-gradient(to right, rgba(99,102,241,0), rgba(99,102,241,0.5), rgba(99,102,241,0)); margin-bottom: 25px;'>",
+    "<hr class='responsive-hr' style='border: 0; height: 1px; background: linear-gradient(to right, rgba(99,102,241,0), rgba(99,102,241,0.5), rgba(99,102,241,0)); margin-bottom: 25px;'>",
     unsafe_allow_html=True,
 )
 
