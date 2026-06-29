@@ -177,6 +177,45 @@ st.markdown(
     ::-webkit-scrollbar-thumb:hover {
         background: rgba(99, 102, 241, 0.5);
     }
+
+    /* Header Responsive Layout */
+    .header-container {
+        display: flex;
+        align-items: flex-end;
+        gap: 20px;
+        margin-bottom: 5px;
+    }
+    .header-logo {
+        height: 115px;
+        width: auto;
+        display: block;
+        margin-bottom: 0px;
+        filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.15));
+    }
+    .header-text-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 12px;
+    }
+    
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            gap: 15px !important;
+            margin-bottom: 15px !important;
+        }
+        .header-logo {
+            height: 90px !important;
+            margin-bottom: 5px !important;
+        }
+        .header-text-container {
+            align-items: center !important;
+            padding-bottom: 0px !important;
+        }
+    }
 </style>
 """,
     unsafe_allow_html=True,
@@ -185,9 +224,9 @@ st.markdown(
 # Application Header
 st.markdown(
     f"""
-<div style="display: flex; align-items: flex-end; gap: 20px; margin-bottom: 5px;">
-    <img src="{logo_base64}" style="height: 115px; width: auto; display: block; margin-bottom: 0px; filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.15));">
-    <div style="display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 12px;">
+<div class="header-container">
+    <img src="{logo_base64}" class="header-logo">
+    <div class="header-text-container">
         <h1 class="gradient-text" style="font-size: 2.3rem; margin: 0; padding: 0; line-height: 1.0;">SEAT CHAT BOT</h1>
         <h2 style="font-size: 1.15rem; color: #f8fafc !important; font-weight: 600; margin: 6px 0 3px 0; padding: 0; font-family: 'Space Grotesk'; letter-spacing: 0.2px; line-height: 1.1;">Siddartha Educational Academy Group of Institutions</h2>
         <p style="color: #94a3b8 !important; font-size: 0.90rem; margin: 2px 0 0 0; padding: 0; font-weight: 400; line-height: 1.1;">Multi-Stage Hallucination Mitigation RAG (V0 - V5)</p>
