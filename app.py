@@ -208,12 +208,12 @@ st.markdown(
             flex-direction: column !important;
             align-items: center !important;
             text-align: center !important;
-            gap: 4px !important;
+            gap: 15px !important;
             margin-bottom: 15px !important;
         }
         .header-logo {
             height: 90px !important;
-            margin-bottom: 0px !important;
+            margin-bottom: 5px !important;
         }
         .header-text-container {
             align-items: center !important;
@@ -223,21 +223,31 @@ st.markdown(
         [data-testid="stHeader"] {
             background-color: rgba(0, 0, 0, 0) !important;
             background: transparent !important;
-            height: 40px !important;
-            min-height: 40px !important;
+            height: 45px !important;
+            min-height: 45px !important;
         }
         [data-testid="stHeader"] button,
         div[data-testid="collapsedControl"] {
-            top: 10px !important;
+            top: 13px !important;
         }
         .main .block-container,
         div[data-testid="stAppViewBlockContainer"] {
             padding-top: 0px !important;
-            margin-top: -52px !important;
+            margin-top: -45px !important;
         }
         /* 2. Decrease space between header and chat assistant */
         .header-title {
             font-size: 1.7rem !important;
+        }
+        .header-subtitle {
+            font-size: 0.82rem !important;
+            white-space: nowrap !important;
+        }
+        .chat-title {
+            font-size: 1.1rem !important;
+            white-space: nowrap !important;
+            margin-top: -6px !important;
+            margin-bottom: 4px !important;
         }
         .header-sublabel,
         .responsive-hr {
@@ -245,7 +255,7 @@ st.markdown(
         }
         div[data-testid="stVerticalBlockBorderWrapper"] {
             padding: 8px 12px 10px 12px !important;
-            margin-top: -15px !important;
+            margin-top: -30px !important;
         }
         /* 3. Decrease height of the chat display container to fit viewport */
         div[data-testid="stVerticalBlock"][style*="height"] {
@@ -335,7 +345,7 @@ if menu == "💬 Chatbot Assistant":
     with main_chat:
         with st.container(border=True):
             st.markdown(
-                "<h3 style=\"font-family: 'Space Grotesk'; font-weight: 600; margin-top:0px; color: #f8fafc !important;\">💬 Chat Assistant</h3>",
+                "<h3 class=\"chat-title\" style=\"font-family: 'Space Grotesk'; font-weight: 600; margin-top:0px; color: #f8fafc !important;\">💬 Chat Assistant</h3>",
                 unsafe_allow_html=True,
             )
 
@@ -375,7 +385,7 @@ if menu == "💬 Chatbot Assistant":
 
         # Chat Input Box
         user_input = st.chat_input(
-            "Ask a question about academics, placements, admissions, hostels..."
+            "Ask a question about academics,placements, etc.."
         )
 
         if user_input:
