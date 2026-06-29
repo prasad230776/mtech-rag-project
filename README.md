@@ -27,6 +27,15 @@ The **SEAT Chat Bot** is a production-grade, multi-stage Retrieval-Augmented Gen
 
 ---
 
+## Models Used
+To optimize performance, latency, and cost, the application coordinates several specialized models:
+* **Primary Chat Generation LLM:** `llama-3.3-70b-versatile` (hosted on Groq) — Used for formulating the final coherent answers from verified contexts.
+* **Reasoning / Claim Verification Model:** `llama-3.1-8b-instant` (hosted on Groq) — Decomposes generation outputs into facts and verifies them against source segments.
+* **Semantic Embeddings Model:** `BAAI/bge-base-en-v1.5` (running locally on CPU via LangChain HuggingFace Embeddings) — Encodes document chunks for dense vector retrieval.
+* **Reranking Cross-Encoder:** `BAAI/bge-reranker-base` (running locally on CPU via Sentence Transformers CrossEncoder) — Scores and reranks the retrieved dense and lexical candidate contexts.
+
+---
+
 ## Data Preparation Pipeline
 
 Located in [src/ingestion/prepare_data.py](file:///Users/sivaprasad/Desktop/m-tech-rag-project-23/src/ingestion/prepare_data.py) and [src/ingestion/create_chroma.py](file:///Users/sivaprasad/Desktop/m-tech-rag-project-23/src/ingestion/create_chroma.py).
