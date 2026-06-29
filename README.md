@@ -195,7 +195,13 @@ If you prefer to run the application locally without Docker:
    ```bash
    uv sync
    ```
-2. Run data preparation scripts to index PDFs and CSVs:
+2. Configure Environment Variables:
+   Copy the sample environment file to `.env` and fill in your keys:
+   ```bash
+   cp .env.example .env
+   ```
+   Ensure you open `.env` and supply your `GROQ_API_KEY`.
+3. Run data preparation scripts to index PDFs and CSVs:
    ```bash
    uv run src/ingestion/prepare_data.py
    uv run src/ingestion/create_chroma.py
