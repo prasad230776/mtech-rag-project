@@ -11,5 +11,4 @@ wheels/
 
 # Local secrets & databases
 .env
-chroma_db/
 .DS_Store

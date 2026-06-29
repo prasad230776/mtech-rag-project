@@ -56,17 +56,21 @@ class V4Pipeline:
         message = "Reliable answer generated."
         
         # Escalate if confidence is low OR if no claims were verified and the output was not "Information not found"
+        sources = v3_result.get("sources", [])
         if cs < threshold:
             decision = "ESCALATE"
             final_answer = "The response could not be confidently verified. Please consult the institution office."
             message = f"Escalated due to low confidence score ({cs:.2f} < {threshold:.2f})."
+            sources = []
         elif final_answer == "Information not found":
             decision = "ACCEPT"
             message = "No context was found to verify this answer."
+            sources = []
             
         result = v3_result.copy()
         result.update({
             "answer": final_answer,
+            "sources": sources,
             "confidence_score": cs,
             "decision": decision,
             "message": message,

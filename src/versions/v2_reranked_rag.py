@@ -23,10 +23,12 @@ class V2Pipeline:
         # 2. Format Prompt & Invoke LLM
         formatted_prompt = self.prompt.format_messages(context=context, question=question)
         response = self.llm.invoke(formatted_prompt)
+        answer = response.content.strip()
+        sources = [] if answer == "Information not found" else [doc.metadata.get("source", "unknown") for doc in docs]
         
         return {
-            "answer": response.content.strip(),
-            "sources": [doc.metadata.get("source", "unknown") for doc in docs],
+            "answer": answer,
+            "sources": sources,
             "context": context,
             "retrieved_docs": docs,
             "metrics": {

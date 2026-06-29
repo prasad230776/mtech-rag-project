@@ -91,10 +91,17 @@ class V1Pipeline:
         # 4. Generate response
         formatted_prompt = self.prompt.format_messages(context=context, question=question)
         response = self.llm.invoke(formatted_prompt)
+        answer = response.content.strip()
+        
+        # If the information is not found or could not be retrieved from web fallback
+        if answer == "Information not found" or "Not able to retrieve" in answer:
+            sources = []
+        else:
+            sources = source_list
         
         return {
-            "answer": response.content.strip(),
-            "sources": source_list,
+            "answer": answer,
+            "sources": sources,
             "context": context,
             "retrieved_docs": docs,
             "web_fallback_used": len(web_docs) > 0,

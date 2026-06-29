@@ -43,22 +43,43 @@ class V3Pipeline:
             sentences = re.split(r'(?<=[.!?]) +', response_text)
             return [s.strip() for s in sentences if s.strip()]
 
-    def verify_claim(self, context: str, claim: str) -> str:
-        """Verifies a single claim against the context. Returns SUPPORTED, CONTRADICTED, or UNSUPPORTED."""
+    def verify_claim(self, context: str, claim: str) -> tuple:
+        """Verifies a single claim against the context. Returns (verdict, sources_list)."""
         verification_prompt = get_claim_verification_prompt()
         formatted_prompt = verification_prompt.format_messages(context=context, claim=claim)
         try:
             response = self.reasoner.invoke(formatted_prompt)
-            result = response.content.strip().upper()
-            if "SUPPORTED" in result:
-                return "SUPPORTED"
-            elif "CONTRADICTED" in result:
-                return "CONTRADICTED"
-            else:
-                return "UNSUPPORTED"
+            content = response.content.strip()
+            content_upper = content.upper()
+            
+            # Extract verdict
+            verdict = "UNSUPPORTED"
+            if "SUPPORTED" in content_upper:
+                verdict = "SUPPORTED"
+            elif "CONTRADICTED" in content_upper:
+                verdict = "CONTRADICTED"
+            
+            # Extract sources
+            sources = []
+            if verdict == "SUPPORTED":
+                # Match line like "Sources: [src1, src2]" or "Sources: src1, src2"
+                match = re.search(r'sources:\s*\[?(.*?)\]?$', content, re.IGNORECASE | re.MULTILINE)
+                if match:
+                    source_str = match.group(1)
+                    for s in re.split(r',', source_str):
+                        s_clean = s.replace('"', '').replace("'", '').replace('[', '').replace(']', '').strip()
+                        if s_clean:
+                            sources.append(s_clean)
+                
+                # Fallback: regex search for filenames ending in extensions (.pdf, .csv)
+                if not sources:
+                    filenames = re.findall(r'[\w\.-]+\.(?:pdf|csv)', content)
+                    sources = [f.strip() for f in filenames]
+                    
+            return verdict, sources
         except Exception as e:
             print(f"Claim verification failed for '{claim}': {str(e)}")
-            return "UNSUPPORTED"
+            return "UNSUPPORTED", []
 
     def invoke(self, question: str) -> dict:
         # 1. Retrieve & Rerank documents
@@ -94,18 +115,28 @@ class V3Pipeline:
         # 4. Verify Chunks
         supported_claims = []
         verified_claims_info = []
+        actual_sources = set()
+        
+        # Gather all valid sources from retrieved docs to prevent hallucinated source names
+        valid_sources = {doc.metadata.get("source", "").strip() for doc in docs if doc.metadata.get("source")}
         
         for claim in claims:
-            verdict = self.verify_claim(context, claim)
-            verified_claims_info.append({"claim": claim, "verdict": verdict})
+            verdict, claim_sources = self.verify_claim(context, claim)
+            verified_claims_info.append({"claim": claim, "verdict": verdict, "sources": claim_sources})
             if verdict == "SUPPORTED":
                 supported_claims.append(claim)
+                for s in claim_sources:
+                    if s.strip() in valid_sources:
+                        actual_sources.add(s.strip())
                 
         # 5. Compile Filtered Response
         if supported_claims:
             filtered_answer = " ".join(supported_claims)
+            # If actual_sources is somehow empty but we have supported claims, fallback to all valid sources
+            sources = list(actual_sources) if actual_sources else list(valid_sources)
         else:
             filtered_answer = "Information not found"
+            sources = []
             
         # Calculate Faithfulness: Supported Claims / Total Claims
         faithfulness = len(supported_claims) / len(claims) if claims else 1.0
@@ -113,7 +144,7 @@ class V3Pipeline:
         return {
             "answer": filtered_answer,
             "raw_answer": raw_answer,
-            "sources": [doc.metadata.get("source", "unknown") for doc in docs],
+            "sources": sources,
             "context": context,
             "retrieved_docs": docs,
             "claims": claims,

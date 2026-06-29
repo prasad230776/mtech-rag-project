@@ -52,13 +52,15 @@ Classify the claim into exactly one of three categories:
 - [CONTRADICTED]: The context directly contradicts the claim.
 - [UNSUPPORTED]: The context does not provide enough evidence to support or contradict the claim.
 
+If the claim is SUPPORTED, identify the source(s) from the context (e.g. "Source: <filename>") that contain the supporting information.
+
 Context:
 {context}
 
 Claim:
 {claim}
 
-Verdict:"""
+Verdict and Sources (Format: "Verdict: [STATUS]" followed by "Sources: [source_name_1, source_name_2]" if status is SUPPORTED):"""
     )
 
 def get_query_intelligence_prompt() -> ChatPromptTemplate:
