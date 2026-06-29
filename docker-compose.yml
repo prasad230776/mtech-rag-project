@@ -39,9 +39,9 @@ services:
       - STREAMLIT_SERVER_FILE_WATCHER_TYPE=none
       
 
-    volumes:
-      - ./chroma_db:/app/chroma_db
-      - ./data:/app/data
+    # volumes:
+    #   - ./chroma_db:/app/chroma_db
+    #   - ./data:/app/data
 
 
     depends_on:
