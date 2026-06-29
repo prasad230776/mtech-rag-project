@@ -188,7 +188,7 @@ st.markdown(
 <div style="display: flex; align-items: flex-end; gap: 20px; margin-bottom: 5px;">
     <img src="{logo_base64}" style="height: 115px; width: auto; display: block; margin-bottom: 0px; filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.15));">
     <div style="display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 12px;">
-        <h1 class="gradient-text" style="font-size: 2.3rem; margin: 0; padding: 0; line-height: 1.0;">SEAT RAG Assistant</h1>
+        <h1 class="gradient-text" style="font-size: 2.3rem; margin: 0; padding: 0; line-height: 1.0;">SEAT CHAT BOT</h1>
         <h2 style="font-size: 1.15rem; color: #f8fafc !important; font-weight: 600; margin: 6px 0 3px 0; padding: 0; font-family: 'Space Grotesk'; letter-spacing: 0.2px; line-height: 1.1;">Siddartha Educational Academy Group of Institutions</h2>
         <p style="color: #94a3b8 !important; font-size: 0.90rem; margin: 2px 0 0 0; padding: 0; font-weight: 400; line-height: 1.1;">Multi-Stage Hallucination Mitigation RAG (V0 - V5)</p>
     </div>
